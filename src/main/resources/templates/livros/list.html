@@ -35,8 +35,13 @@
 						<img th:if="${livro.capa}" th:src="@{'/' + ${livro.capa}}" width="100px" />
 						<img th:unless="${livro.capa}" th:src="@{'../img/unless.jpg'}" width="100px" />
 					</th>
-					<td><a href="#" th:href="@{'/livros/alterar/'+${livro.id}}"> Alterar </a></td>
-					<td><a href="#" th:href="@{'/livros/excluir/'+${livro.id}}"> Excluir </a></td>
+					<td>
+			   			<a th:if="${#request.isUserInRole('ADMIN')}" href="#" th:href="@{'/livros/alterar/'+${livro.id}}"> Alterar </a>
+					</td>
+								
+					<td>
+			   			<a th:if="${#request.isUserInRole('ADMIN')}" href="#" th:href="@{'/livros/excluir/'+${livro.id}}"> Excluir </a>
+					</td>
 				</tr>
 			</tbody>
 		</table>

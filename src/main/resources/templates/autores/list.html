@@ -30,8 +30,13 @@
 				<tr th:each="autor : ${autores}">
 					<th scope="row" th:text="${autor.id}">1</th>
 					<td><a href="#" th:href="@{'/autores/alterar/'+${autor.id}}" th:text="${autor.nome}"> Título </a></td>
-					<td><a href="#" th:href="@{'/autores/alterar/'+${autor.id}}"> Alterar </a></td>
-					<td><a href="#" th:href="@{'/autores/excluir/'+${autor.id}}"> Excluir </a></td>
+					<td>
+			   			<a th:if="${#request.isUserInRole('ADMIN')}" href="#" th:href="@{'/autores/alterar/'+${autor.id}}"> Alterar </a>
+					</td>
+								
+					<td>
+			   			<a th:if="${#request.isUserInRole('ADMIN')}" href="#" th:href="@{'/autores/excluir/'+${autor.id}}"> Excluir </a>
+					</td>
 				</tr>
 			</tbody>
 		</table>

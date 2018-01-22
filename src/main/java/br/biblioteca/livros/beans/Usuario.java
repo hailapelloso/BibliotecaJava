@@ -17,16 +17,29 @@ public class Usuario {
 	@GeneratedValue
 	private Long id;
 	
-	@NotNull(message = "Usuário é obrigatório")
-	@Size(min = 2, max = 100, message = "A quantidade de caracteres deve estar entre 2 a 100 caracteres")	
+	//@NotNull(message = "Usuário é obrigatório")
+	//@Size(min = 5, max = 100, message = "A quantidade de caracteres deve estar entre 2 a 100 caracteres")	
 	private String username;
 	
-	@NotNull(message = "Usuário é obrigatório")
-	@Size(min = 6, max = 30, message = "A quantidade de caracteres deve estar entre 6 a 30 caracteres")	
-	private String passsword;
+	//@NotNull(message = "Senha é obrigatório")
+	//@Size(min = 6, max = 100, message = "A quantidade de caracteres deve estar entre 6 a 100 caracteres")	
+	private String password;
+	
+	@OneToMany(mappedBy="usuario")
+	private List<Emprestimo> emprestimos = new ArrayList<>();
+		
+	public Usuario() { }
+	
+	public Usuario(String username, String password) {
+		this.username = username;
+		this.password = password;
+	}
 	
 	@OneToMany(mappedBy="usuario")
 	private List<Review> reviews = new ArrayList<>();
+	
+	@OneToMany(mappedBy="usuario")
+	private List<Role> roles = new ArrayList<>();
 	
 	public List<Review> getReviews() {
 		return reviews;
@@ -52,18 +65,28 @@ public class Usuario {
 		this.username = username;
 	}
 
-	public String getPasssword() {
-		return passsword;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setPasssword(String passsword) {
-		this.passsword = passsword;
+	public void setPassword(String passsword) {
+		this.password = passsword;
 	}
 	
+	public List<Role> getRoles() {
+		return this.roles;
+	}
+
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
+	}	
 	
-	
-	
-	
-	
+	public List<Emprestimo> getEmprestimos() {
+		return emprestimos;
+	}
+
+	public void setEmprestimos(List<Emprestimo> emprestimos) {
+		this.emprestimos = emprestimos;
+	}
 
 }

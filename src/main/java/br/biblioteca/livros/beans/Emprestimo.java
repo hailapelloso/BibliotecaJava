@@ -3,6 +3,7 @@ package br.biblioteca.livros.beans;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
@@ -12,6 +13,7 @@ import javax.persistence.TemporalType;
 public class Emprestimo {
 	
 	@Id
+	@GeneratedValue
 	private Long id;
 	
 	@Temporal(TemporalType.TIMESTAMP)
@@ -23,6 +25,9 @@ public class Emprestimo {
 	@ManyToOne
 	private Livro livro;
 	
+	@ManyToOne
+	private Usuario usuario;
+	
 	public Livro getLivro() {
 		return livro;
 	}
@@ -31,6 +36,14 @@ public class Emprestimo {
 		this.livro = livro;
 	}
 
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}	
+	
 	public Long getId() {
 		return id;
 	}

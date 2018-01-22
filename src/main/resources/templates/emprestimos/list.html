@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="layout">
+<head>
+<meta charset="UTF-8" />
+<title>Biblioteca de Livros</title>
+</head>
+<body>
+	
+	<h1 layout:fragment="header">
+		<a th:href="@{/emprestimos/novo}"  class="btn btn-sm btn-info"><i class="glyphicon glyphicon-plus"></i></a>
+		Empréstimos
+	</h1>
+
+	<div layout:fragment="content" class="container">
+		<table class="table">
+			<thead>
+				<tr>
+					<th scope="col">ID</td>
+					<th scope="col">Título</td>
+					<th scope="col">Capa</td>
+					<th scope="col">Data do empréstimo</td>
+					<th scope="col">Data da devolução</td>
+					<th scope="col"></td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:if="${emprestimos.empty}">
+					<td colspan="2">Sem empréstimos</td>
+				</tr>			
+				<tr th:each="emprestimo : ${emprestimos}">
+					<th scope="row" th:text="${emprestimo.id}">1</th>
+					<th scope="row" th:text="${emprestimo.livro.nome}"></th>
+					<th scope="row">
+						<img th:if="${emprestimo.livro.capa}" th:src="@{'/' + ${emprestimo.livro.capa}}" width="100px" />
+						<img th:unless="${emprestimo.livro.capa}" th:src="@{'../img/unless.jpg'}" width="100px" />
+					</th>
+					<th scope="row" th:text="${#dates.format(emprestimo.dataEmprestimo, 'dd/MM/yyyy HH:mm')}"></th>
+					<th scope="row" th:text="${#dates.format(emprestimo.dataDevolucao, 'dd/MM/yyyy HH:mm')}"></th>
+					<td>
+			   			<a th:if="${emprestimo.dataDevolucao == null}" href="#" th:href="@{'/emprestimos/devolver/'+${emprestimo.id}}"> Devolver </a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+</body>
+</html>

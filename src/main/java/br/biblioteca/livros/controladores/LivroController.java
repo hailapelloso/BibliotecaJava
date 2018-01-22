@@ -70,7 +70,9 @@ public class LivroController {
 			}
 		} else {
 			if (capaUrl.getOriginalFilename().equals("")) {
-				model.addAttribute("capa", "A capa não pode ser vazia");
+				model.addAttribute("message", "A capa não pode ser vazia");
+				Iterable<Autor> autores = autorRepository.findAll();
+				return new ModelAndView("livros/form", "autores", autores);
 			} else {
 				incluiCapa(capaUrl, livro, model);
 			}

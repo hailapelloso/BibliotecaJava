@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+    <head>
+        <title>Biblioteca de livros</title>
+		<!-- Bootstrap -->
+		<link rel="stylesheet" th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}" />
+		<link rel="stylesheet" th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap-theme.min.css}" />
+        
+    </head>
+    <body>
+        <div th:if="${param.error}">
+            Usuário e senha inválidos
+        </div>
+        
+        <div th:if="${param.logout}">
+            Você foi desconectado.
+        </div>
+        
+		<form class="form-signin" th:action="@{/usuarios/autentication}" method="post" th:object="${usuario}" style="margin: 0 auto; width: 40%; margin-top:50px;">
+		  
+	      <div th:if="${#fields.hasErrors('username')}" class="alert alert-warning" role="alert">
+	        <label th:errors="*{username}">Username Error</label>
+	      </div>
+	      
+	      <div th:if="${#fields.hasErrors('password')}" class="alert alert-warning" role="alert">
+	        <label  th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Username Error</label>
+	      </div>
+	
+	      <div class="form-label-group">
+	        <label for="username">Usuário</label>
+	        <input type="text" id="username" name="username" class="form-control" placeholder="Usuário" required="" autofocus="">
+	      </div>
+	
+	      <div class="form-label-group" style="margin-top: 20px; margin-bottom: 30px;">
+	        <label for="password">Senha</label>
+	        <input type="password" id="password" name="password" class="form-control" placeholder="Password" required="">
+	      </div>
+	
+	      <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+	    </form>        
+
+    </body>
+</html>
